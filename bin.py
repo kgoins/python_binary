@@ -5,43 +5,56 @@ from math import floor
 
 class Bin:
     def __init__(self, num):
-        self.int = 0
-        self.bin = ""
-        self.len = 0
+        self.bin = to_bin(num)
+        self.bits = len(self.bin)
 
-        if isinstance(num, int):
-        	self.int = num
-        	self.bin = int_to_bin(num)
-        	self.len = len(bin)
+    def __str__(self):
+        return "0b" + self.bin
 
-        elif isinstance(num, str):
-        	self.bin = num
-        	self.len = len(num)
+    def __int__(self):
+        return bin_to_int(self.bin)
 
+
+def to_bin(num):
+    if isinstance(num, str):
+        return str_to_bin(num)
+    elif isinstance(num, int):
+        return int_to_bin(num)
 
 def bits_needed(num):
-	if isinstance(num, int):
-		return floor(log(num, 2)) +1
+    if isinstance(num, int):
+        return floor(log(num, 2)) +1
 
-def int_to_bin(int):
-	targ = int
-	bits = ""
+def str_to_bin(num):
+    valid = True
 
-	while targ > 0:
-		r = targ % 2
-		bits = str(r) + bits
-		targ = (targ - r) / 2
+    for i in num:
+        if i not in ["0", "1"]:
+            valid = False
 
-	return bits
+    if valid == True:
+        return num
+    else:
+        return None
 
-def bin_to_int(bin):
-	targ = bin
-	int_result = 0
 
-	for i in range(len(targ)-1,0, -1):
-		print "i: " + str(i)
-		print "bin[i]: " + bin[i]
-		int_result += int(bin[i]) * 2**i
-		print "result: " + str(int_result)
+def int_to_bin(num):
+    bits = ""
 
-	return int_result
+    while num > 0:
+        r = num % 2
+        bits = str(r) + bits
+        num = (num - r) / 2
+
+    return bits
+
+
+def bin_to_int(num):
+    result = 0
+    i = len(num)-1
+    
+    for bit in num:
+        result += int(bit) * 2**i
+        i -= 1
+
+    return result
