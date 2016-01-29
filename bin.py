@@ -16,11 +16,11 @@ class Bin:
         return "0b" + self.bin
 
     def __int__(self):
-        return bin_to_int(self.bin)
+        return binconv.bin_to_int(self.bin)
 
     # math operator overrides
     def __add__(self, targ):
-        return binmath.add(self.bin, targ.bin)
+        return Bin(binmath.add(self.bin, targ.bin))
 
 
 def bits_needed(num):

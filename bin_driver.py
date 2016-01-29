@@ -9,5 +9,10 @@ def main():
 	i = int(b)
 	print "int of b: " + str(i)
 
+	b1 = Bin("101")
+	print "b1: " + str(b1)
+
+	print b + b1
+
 if __name__ == "__main__":
 	main()

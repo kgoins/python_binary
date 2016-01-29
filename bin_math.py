@@ -16,7 +16,7 @@ def add(bin1, bin2):
 
 	result = ""
 	cin = 0	
-	for i in range(0,len(bin1)):
+	for i in range(len(bin1)-1, -1, -1):
 		bitsum = int(bin1[i]) + int(bin2[i]) + cin
 		cin = 0
 
@@ -29,10 +29,8 @@ def add(bin1, bin2):
 
 		result = str(bitsum) + result
 		i += 1
-
+	if cin == 1:
+		result = "1" + result
 	return result
-
-print add("101", "1")
-
 
 
